@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { FaGithub, FaPlus, FaTrash } from "react-icons/fa";
 import supabase from "@/config/supabaseClient";
+import { useRouter } from "next/navigation";
 
 function Page() {
+  const router = useRouter();
   const [hasWorkExperience, setHasWorkExperience] = useState(false);
   // const [workExperiences, setWorkExperiences] = useState([
   //   { company: "", location: "", role: "", startDate: "", endDate: "", responsibilities: "" }
@@ -97,6 +99,7 @@ const handleInputChange = (
 
       alert("Data inserted successfully!");
       console.log(data);
+      router.push("/projects?githubUsername=" + formData.githubUsername);
     } catch (err) {
       console.error("Error inserting data:", err);
       alert(`Failed to insert data: ${(err as Error).message}`);
