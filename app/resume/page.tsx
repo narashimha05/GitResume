@@ -89,7 +89,7 @@ function ResumePageContent() {
     }
   };
   return (
-    <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-xl rounded-lg border border-gray-200">
+    <div className="max-w-6xl mx-auto my-10 p-6 bg-white shadow-xl rounded-lg border border-gray-200">
       <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Resume Details</h1>
       {userDetails ? (
         <div className="space-y-4">
@@ -98,8 +98,8 @@ function ResumePageContent() {
             <div>
               <p className="text-2xl font-semibold uppercase">{userDetails.fullName}</p>
               <p className="text-gray-700">{userDetails.description}</p>
-            <div className='flex gap-6 mt-2'>
-              <p className="text-gray-500 flex gap-2 items-center text-sm sm:text-md"><FaGithub size={20}/>{userDetails.githubUsername}</p>
+            <div className='flex gap-2 mt-3 flex-wrap'>
+              <a href={`https://github.com/${userDetails.githubUsername}/`} target="blank"><p className="text-gray-500 flex gap-2 items-center text-sm sm:text-md"><FaGithub size={20}/>{userDetails.githubUsername}</p></a>
               <p className="text-gray-500 flex gap-2 items-center text-sm sm:text-md"><IoCall size={20}/> {userDetails.phoneNumber}</p>
               <p className="text-gray-500 flex gap-2 items-center text-sm sm:text-md"><FaLocationPin size={20}/> {userDetails.address}</p>
             </div>
@@ -107,7 +107,7 @@ function ResumePageContent() {
           </div>
           
           <p className="text-gray-700"><div className='font-extrabold text-xl'>Education:</div> {userDetails.education.split("\n").map((edu, index) => (
-            <div key={index} className=" px-3 py-1 rounded-full text-sm">{edu}</div>
+            <div key={index} className=" px-3 py-1 rounded-full text-sm">- {edu}</div>
           ))}</p>
           <div>
             <h2 className="text-xl font-extrabold">Skills:</h2>
@@ -162,7 +162,7 @@ function ResumePageContent() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {userDetails && projects.map((project) => (
               <div key={project.id} className="bg-white shadow-lg rounded-lg p-4 border">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mb-2">
                   <p className="text-md font-semibold text-black">{project.project_name}</p>
                   <a
                       href={`https://github.com/${userDetails.githubUsername}/${project.project_name}`}
