@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 GitResume  
 
-## Getting Started
+Automatically generate a professional resume using your GitHub profile and projects.  
 
-First, run the development server:
+## 🌟 Features  
+- **📄 Auto-generated Resume** – Fetches your GitHub profile and projects.
+- **🎨 Clean & Professional UI** – Displays user details, projects, and experience in an elegant format.  
+- **🔗 GitHub Integration** – Showcases your repositories with descriptions and links.  
+- **📍 Location & Contact Info** – Adds your location, phone number based on input.  
+- **📊 GitHub Activity Chart** – Displays your contributions visually.  
+- **🗑️ Delete Profile Option** – Removes user details when needed.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📌 How It Works  
+1. **Fill the Form** with your GitHub username.  
+2. **Select Projects** from your repositories.  
+3. **Enter Additional Info** (Skills, Work Experience, etc.).  
+4. **Generate Your Resume** instantly!  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Wireframe / Drawing  
+[🔗 View Project Design](#) (https://drive.google.com/file/d/1zYz8-qyRGQ2QoVNikRvVALRLUJYTONdg/view?usp=drive_link)  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔗 Deployed Link  
+[🚀 Live Demo](#) (https://git-resume-coral.vercel.app/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack  
+- **Frontend:** Next.js, Tailwind CSS  
+- **Backend:** Supabase (Database & Authentication)  
+- **Other:** GitHub API, React Icons  
 
-## Learn More
+Special Thanks to my Friend AtmaPrakash for his UI design and wireframe.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📥 Installation  
+```sh
+git clone https://github.com/narashimha05/GitResume.git  
+cd gitresume  
+npm install  
+npm run dev  
