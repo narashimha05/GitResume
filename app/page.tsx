@@ -18,9 +18,7 @@ export default function LandingPage() {
   }
   return (
     <div className="bg-gray-900 text-white">
-      {/* Hero Section with Grid Background */}
       <section className="relative flex flex-col items-center justify-center h-screen text-center px-6 bg-white overflow-hidden">
-        {/* Grid Background */}
         <div className="absolute inset-0 grid grid-cols-12 grid-rows-12 gap-[0.1px] opacity-10">
           {[...Array(144)].map((_, i) => (
             <div key={i} className="w-full h-full bg-white border border-black"></div>
