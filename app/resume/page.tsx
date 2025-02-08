@@ -10,6 +10,8 @@ import { FaLocationPin } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { LuExternalLink } from "react-icons/lu";
+import { BeatLoader } from "react-spinners";
+import { Tooltip } from 'react-tooltip'
 
 function ResumePageContent() {
   const router = useRouter();
@@ -39,6 +41,7 @@ function ResumePageContent() {
 
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [projects, setProjects] = useState<{ id: number; project_name: string; description: string }[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -75,12 +78,14 @@ function ResumePageContent() {
 
   const handleDelete = async () => {
     if (!userId) return;
+    setLoading(true);
     const confirmDelete = window.confirm("Are you sure you want to delete your profile?");
     if (!confirmDelete) return;
     try {
       const { error: projectsError } = await supabase.from("projects").delete().eq("user_id", userId);
       if (projectsError) throw projectsError;
       const { error: userError } = await supabase.from("users").delete().eq("id", userId);
+      setLoading(false);
       if (userError) throw userError;
       router.push("/");
     } catch (error) {
@@ -186,10 +191,12 @@ function ResumePageContent() {
           </ul>
           <button
             onClick={handleDelete}
-            className="mt-6 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-all"
+            className="mt-6 w-full bg-black  text-white py-2 rounded-lg hover:bg-black-700 transition-all font-bold"
+            data-tooltip-id="my-tooltip" data-tooltip-content="This will erase the data generated here and goes back to the home page"
           >
-            Delete Profile
+            {loading?<BeatLoader size={8} color="#ffffff"/>:<p>Back</p>}
           </button>
+          <Tooltip id="my-tooltip" />
         </div>
       ) : (
         <p className="text-center text-gray-500">Loading user details...</p>

@@ -4,9 +4,18 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FaGithub, FaUserCheck, FaCode } from "react-icons/fa";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { BeatLoader } from "react-spinners";
 
 
 export default function LandingPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const handleForm = () => {
+    setLoading(true);
+    router.push("/form");
+  }
   return (
     <div className="bg-gray-900 text-white">
       {/* Hero Section with Grid Background */}
@@ -41,7 +50,7 @@ export default function LandingPage() {
           transition={{ duration: 1, delay: 0.5 }}
         >
           <Button className="bg-green-600 hover:bg-green-500 text-lg">
-            <Link href="/form">Get Started</Link>
+            <div onClick={handleForm}>{loading ? <BeatLoader size={8}/> : <p>Get Started</p>}</div>
           </Button>
           <Button className="bg-gray-700 hover:bg-gray-600 text-lg">
             <Link href="https://github.com/narashimha05/GitResume" target="_blank" className="flex items-center">
@@ -111,8 +120,8 @@ export default function LandingPage() {
       <footer className="py-10 bg-gray-900 text-center border-t border-gray-700">
         
         <p className="text-gray-200 mt-2">
-          Contributors: <span className="text-green-300">Chinnari Narashimha (Developer)</span> &{" "}
-          <span className="text-green-300">AtmaPrakash Sahu (UI/UX Designer)</span>
+          Contributors: <span className="text-green-300"><Link href={"https://www.linkedin.com/in/chinnari-narashimha-prasad-a0253628a/"}>Chinnari Narashimha (Developer)</Link></span> &{" "}
+          <span className="text-green-300"><Link href={"https://www.linkedin.com/in/atmaprakash-sahu-99b855301/"}>AtmaPrakash Sahu (UI/UX Designer)</Link></span>
         </p>
         <div className="mt-4 mb-4 flex justify-center space-x-6">
           <Link href="/privacy" className="text-gray-400 hover:text-white">Privacy Policy</Link>

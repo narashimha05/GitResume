@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import supabase from "@/config/supabaseClient";
+import { BeatLoader } from "react-spinners";
 
 function ProjectsPageContent() {
   const router = useRouter();
@@ -12,7 +13,7 @@ function ProjectsPageContent() {
   const [projects, setProjects] = useState<{ id: number; name: string; description: string }[]>([]);
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchUserId = async () => {
       if (!githubUsername) return;
@@ -78,7 +79,7 @@ function ProjectsPageContent() {
       console.error("User ID not found!");
       return;
     }
-
+    setLoading(true);
     const projectData = selectedProjects.map((projectName) => {
       const project = projects.find((p) => p.name === projectName);
       return {
@@ -90,6 +91,7 @@ function ProjectsPageContent() {
 
     const { error } = await supabase.from("projects").insert(projectData);
 
+    setLoading(false);
     if (error) {
       console.error("Error saving projects:", error.message);
       return;
@@ -122,10 +124,10 @@ function ProjectsPageContent() {
       </div>
       <button
         onClick={handleSubmit}
-        className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg disabled:bg-gray-400 hover:bg-green-700"
+        className="mt-4 px-6 py-2 bg-black text-white rounded-lg disabled:bg-gray-400 hover:bg-gray-700"
         disabled={selectedProjects.length === 0}
       >
-        Submit
+        {loading ? <BeatLoader size={8} color="#ffffff"/>:<p>Submit</p>}
       </button>
     </div>
   );

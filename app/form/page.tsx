@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { FaGithub, FaPlus, FaTrash } from "react-icons/fa";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
-
+import { BeatLoader } from "react-spinners";
 function Page() {
   const router = useRouter();
   const [hasWorkExperience, setHasWorkExperience] = useState(false);
+  const [loading, setLoading] = useState(false);
   // const [workExperiences, setWorkExperiences] = useState([
   //   { company: "", location: "", role: "", startDate: "", endDate: "", responsibilities: "" }
   // ]);
@@ -75,6 +76,7 @@ const handleInputChange = (
 
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setLoading(true);
     e.preventDefault();
 
     try {
@@ -92,9 +94,8 @@ const handleInputChange = (
       const { data, error } = await supabase.from("users").insert([formattedData]);
 
       if (error) throw error;
-
-      alert("Data inserted successfully!");
-      console.log(data);
+      setLoading(false);
+      console.log("Data inserted successfully:", data);
       router.push("/projects?githubUsername=" + formData.githubUsername);
     } catch (err) {
       console.error("Error inserting data:", err);
@@ -217,7 +218,7 @@ const handleInputChange = (
           </div>
 
             <div className="mt-6 grid">
-              <button type="submit" className="w-full py-3 px-4 bg-black text-white text-sm font-medium rounded-lg hover:bg-[#889472]">Continue</button>
+              <button type="submit" className="w-full py-3 px-4 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800">{loading ? <BeatLoader size={8} color="#ffffff"/>:<p>Continue</p>}</button>
             </div>
           </div>
         </form>
