@@ -93,8 +93,8 @@ export default function LandingPage() {
             <p className="text-gray-400">Choose up to 4 projects to feature on your resume.</p>
           </motion.div>
           <motion.div className="p-6 bg-black text-white rounded-xl shadow-md" whileHover={{ scale: 1.05 }}>
-            <h3 className="text-xl font-semibold mb-2">3. Generate & Download</h3>
-            <p className="text-gray-400">Download your resume instantly as a PDF.</p>
+            <h3 className="text-xl font-semibold mb-2">3. Data Privacy</h3>
+            <p className="text-gray-400">We do not store any of your data. Your privacy is our priority.</p>
           </motion.div>
         </div>
       </section>
