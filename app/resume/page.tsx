@@ -89,7 +89,7 @@ function ResumePageContent() {
     }
   };
   return (
-    <div className="max-w-6xl mx-auto my-10 p-6 bg-white shadow-xl rounded-lg border border-gray-200">
+    <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-xl rounded-lg border border-gray-200">
       <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Resume Details</h1>
       {userDetails ? (
         <div className="space-y-4">
