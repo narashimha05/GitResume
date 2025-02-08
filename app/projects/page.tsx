@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import supabase from "@/config/supabaseClient";
 
 function ProjectsPage() {
@@ -80,6 +81,7 @@ function ProjectsPage() {
   };
 
   return (
+    <Suspense>
     <div className="p-6">
       <h1 className="text-xl font-bold mb-4">Select Up to 4 Projects</h1>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -105,6 +107,7 @@ function ProjectsPage() {
         Submit
       </button>
     </div>
+    </Suspense>
   );
 }
 
