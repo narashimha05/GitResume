@@ -13,12 +13,11 @@ function ProjectsPage() {
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
 
-  // Fetch User ID from Supabase
   useEffect(() => {
     const fetchUserId = async () => {
       if (!githubUsername) return;
   
-      console.log("Fetching user with GitHub username:", githubUsername); // ✅ Log input
+      console.log("Fetching user with GitHub username:", githubUsername); 
   
       const { data, error } = await supabase
         .from("users")
@@ -32,7 +31,7 @@ function ProjectsPage() {
       }
   
       if (data) {
-        console.log("Fetched User ID:", data.id); // ✅ Log output
+        console.log("Fetched User ID:", data.id); 
         setUserId(data.id);
       } else {
         console.warn("No user found with this GitHub username.");
@@ -42,9 +41,6 @@ function ProjectsPage() {
     fetchUserId();
   }, [githubUsername]);
   
-  
-
-  // Fetch GitHub Repositories
   useEffect(() => {
     if (!githubUsername) return;
 
@@ -53,7 +49,6 @@ function ProjectsPage() {
       .then((data) => setProjects(data));
   }, [githubUsername]);
 
-  // Handle Select/Deselect Project
   const handleSelectProject = (name: string) => {
     if (selectedProjects.includes(name)) {
       setSelectedProjects(selectedProjects.filter((p) => p !== name));
@@ -62,7 +57,6 @@ function ProjectsPage() {
     }
   };
 
-  // Handle Submit: Store Selected Projects in Supabase
   const handleSubmit = async () => {
     if (!userId) {
       console.error("User ID not found!");
@@ -70,7 +64,6 @@ function ProjectsPage() {
     }
     
 
-    // Store selected projects in the `projects` table
     const projectData = selectedProjects.map((project) => ({
       user_id: userId,
       project_name: project,
@@ -83,7 +76,6 @@ function ProjectsPage() {
       return;
     }
 
-    // Redirect to resume page
     router.push(`/resume?user_id=${userId}`);
   };
 

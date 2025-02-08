@@ -18,7 +18,7 @@ function ResumePage() {
     education: string;
     skills: string;
     hasWorkExperience: boolean;
-    workExperiences: string | null; // Nullable in case it's missing
+    workExperiences: string | null;
   }
 
   interface WorkExperience {
@@ -34,7 +34,6 @@ function ResumePage() {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [projects, setProjects] = useState<{ id: number; project_name: string }[]>([]);
 
-  // Fetch User Details
   useEffect(() => {
     const fetchUserDetails = async () => {
       if (!userId) return;
@@ -56,7 +55,6 @@ function ResumePage() {
     fetchUserDetails();
   }, [userId]);
 
-  // Fetch Selected Projects
   useEffect(() => {
     const fetchProjects = async () => {
       if (!userId) return;
@@ -76,7 +74,7 @@ function ResumePage() {
 
     fetchProjects();
   }, [userId]);
-  //delete
+
   const handleDelete = async () => {
     if (!userId) return;
 
@@ -84,18 +82,19 @@ function ResumePage() {
     if (!confirmDelete) return;
 
     try {
-      // Delete projects first (to avoid foreign key constraint issues)
       const { error: projectsError } = await supabase.from("projects").delete().eq("user_id", userId);
       if (projectsError) throw projectsError;
 
-      // Delete user from users table
       const { error: userError } = await supabase.from("users").delete().eq("id", userId);
       if (userError) throw userError;
 
-      // Redirect to form page
       router.push("/form");
     } catch (error) {
-      console.error("Error deleting user:", error.message);
+      if (error instanceof Error) {
+        console.error("Error deleting user:", error.message);
+      } else {
+        console.error("Error deleting user:", error);
+      }
       alert("Failed to delete profile. Please try again.");
     }
   };
@@ -118,11 +117,10 @@ function ResumePage() {
           </div>
           <GitHubCalendar username={userDetails.githubUsername} colorScheme='light' />
 
-          {/* Skills */}
           <p><strong>Skills:</strong></p>
           <div className="flex flex-wrap gap-2">
             {userDetails.skills
-              .split("\n") // Split by newline instead of comma
+              .split("\n") 
               .map((skill, index) => (
                 <span key={index} className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
                   {skill}
@@ -130,8 +128,6 @@ function ResumePage() {
               ))}
           </div>
 
-
-          {/* Work Experience */}
           {userDetails.hasWorkExperience && userDetails.workExperiences ? (<div>
               <p className="mt-4"><strong>Work Experience:</strong></p>
             <ul className="list-disc pl-5">
@@ -165,7 +161,6 @@ function ResumePage() {
         <p>Loading user details...</p>
       )}
 
-      {/* Projects */}
       <h2 className="text-lg font-bold mt-4">Selected Projects</h2>
       <ul className="list-disc pl-5">
         {projects.map((project) => (
@@ -173,7 +168,6 @@ function ResumePage() {
         ))}
       </ul>
 
-       {/* Delete Button */}
        <button
             onClick={handleDelete}
             className="mt-6 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700"

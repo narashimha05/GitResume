@@ -23,7 +23,6 @@ function Page() {
     skills: ""
   });
 
-  // Toggles Work Experience Section
   const handleWorkExperienceToggle = () => {
     setHasWorkExperience(!hasWorkExperience);
     if (!hasWorkExperience) {
@@ -34,7 +33,6 @@ function Page() {
     }
   };
 
-  // Adds More Work Experience
   const addWorkExperience = () => {
     setFormData({
       ...formData,
@@ -42,7 +40,6 @@ function Page() {
     });
   };
 
-  // Removes Work Experience
   const removeWorkExperience = (index: number) => {
     const updatedExperiences = [...formData.workExperiences];
     updatedExperiences.splice(index, 1);
@@ -50,7 +47,6 @@ function Page() {
   };
 
 
-// type for work experience
 type WorkExperience = {
   company: string;
   location: string;
@@ -60,7 +56,6 @@ type WorkExperience = {
   responsibilities: string;
 };
 
-// Handles Input Change
 const handleInputChange = (
   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   index?: number,
@@ -110,7 +105,7 @@ const handleInputChange = (
 
   return (
     <div>
-      {/* Header */}
+
       <div className="p-4 flex items-center justify-between">
         <div className="font-extrabold text-xl">Resume Builder</div>
         <div>
@@ -118,11 +113,10 @@ const handleInputChange = (
         </div>
       </div>
 
-      {/* Form */}
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-6 border-black border-2 mx-auto">
         <form onSubmit={handleSubmit}>
           <div className="grid gap-2 lg:gap-4">
-            {/* Personal Information */}
+           
             <div className="font-bold text-2xl">Personal Information</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
               <div>
@@ -151,21 +145,18 @@ const handleInputChange = (
               <textarea rows={4} name="description" value={formData.description} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-gray-200"></textarea>
             </div>
 
-            {/* Education */}
             <div className="font-bold text-2xl">Education</div>
             <div>
               <label className="block mb-2 text-sm text-gray-700 font-medium">Write Your Education</label>
               <textarea rows={4} name="education" value={formData.education} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-gray-200"></textarea>
             </div>
 
-            {/* Work Experience Checkbox */}
             <div className="font-bold text-2xl">Work Experience</div>
             <div className="flex items-center gap-2">
               <input type="checkbox" id="workExperience" className="w-5 h-5" checked={hasWorkExperience} onChange={handleWorkExperienceToggle} />
               <label htmlFor="workExperience" className="text-lg font-medium text-gray-700">I have work experience</label>
             </div>
 
-            {/* Work Experience Section (Conditional) */}
             {hasWorkExperience && (
               <div>
                 
@@ -211,7 +202,6 @@ const handleInputChange = (
                   </div>
                 ))}
 
-                {/* Add More Work Experience Button */}
                 <button onClick={addWorkExperience} type="button" className="flex items-center text-blue-600 hover:underline mt-2">
                   <FaPlus className="mr-1" /> Add More Work Experience
                 </button>
@@ -226,7 +216,6 @@ const handleInputChange = (
             <textarea rows={4} name="skills" value={formData.skills} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-gray-200"></textarea>
           </div>
 
-            {/* Submit Button */}
             <div className="mt-6 grid">
               <button type="submit" className="w-full py-3 px-4 bg-[#D9F99D] text-black text-sm font-medium rounded-lg hover:bg-[#889472]">Continue</button>
             </div>
