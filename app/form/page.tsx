@@ -81,11 +81,11 @@ const handleInputChange = (
       const formattedData = {
         ...formData,
         hasWorkExperience: hasWorkExperience,
-        education: formData.education.replace(/, /g, "\n"),
-        skills: formData.skills.replace(/, /g, "\n"),
+        education: formData.education,
+        skills: formData.skills,
         workExperiences: formData.workExperiences.map(exp => ({
           ...exp,
-          responsibilities: exp.responsibilities.replace(/, /g, "\n"),
+          responsibilities: exp.responsibilities,
         })),
       };
 
@@ -105,15 +105,15 @@ const handleInputChange = (
 
   return (
     <div>
-
-      <div className="p-4 flex items-center justify-between">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
+      <div className="p-4 flex items-center justify-between ">
         <div className="font-extrabold text-xl">Resume Builder</div>
         <div>
           <FaGithub size={26} />
         </div>
       </div>
 
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-6 border-black border-2 mx-auto">
+      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-6 mx-auto">
         <form onSubmit={handleSubmit}>
           <div className="grid gap-2 lg:gap-4">
            
@@ -121,40 +121,40 @@ const handleInputChange = (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
               <div>
                 <label className="block mb-2 text-sm text-gray-700 font-medium">Full Name</label>
-                <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="Full Name" />
+                <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="Full Name" required/>
               </div>
               <div>
                 <label className="block mb-2 text-sm text-gray-700 font-medium">GitHub Username</label>
-                <input type="text" name="githubUsername" value={formData.githubUsername} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="GitHub Username" />
+                <input type="text" name="githubUsername" value={formData.githubUsername} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="GitHub Username" required/>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
               <div>
                 <label className="block mb-2 text-sm text-gray-700 font-medium">Address</label>
-                <input type="text" name="address" value={formData.address} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="Write Your Full Address" />
+                <input type="text" name="address" value={formData.address} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="Write Your Full Address" required/>
               </div>
               <div>
                 <label className="block mb-2 text-sm text-gray-700 font-medium">Phone Number</label>
-                <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="Write Your Phone Number" />
+                <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="Write Your Phone Number" required/>
               </div>
             </div>
 
             <div>
-              <label className="block mb-2 text-sm text-gray-700 font-medium">Describe Yourself</label>
-              <textarea rows={4} name="description" value={formData.description} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-gray-200"></textarea>
+              <label className="block mb-2 text-sm text-gray-700 font-medium">Describe Your Role</label>
+              <textarea rows={1} name="description" value={formData.description} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-black text-white" placeholder="Like Frontend Developer, Full Stack Developer" required></textarea>
             </div>
 
             <div className="font-bold text-2xl">Education</div>
             <div>
               <label className="block mb-2 text-sm text-gray-700 font-medium">Write Your Education</label>
-              <textarea rows={4} name="education" value={formData.education} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-gray-200"></textarea>
+              <textarea rows={4} name="education" value={formData.education} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-black text-white" placeholder="Example B.Tech in ECE XYZ Insititute (2023-2027), ABC College (2021-2022). for every new point, separate it by comma" required></textarea>
             </div>
 
             <div className="font-bold text-2xl">Work Experience</div>
             <div className="flex items-center gap-2">
-              <input type="checkbox" id="workExperience" className="w-5 h-5" checked={hasWorkExperience} onChange={handleWorkExperienceToggle} />
-              <label htmlFor="workExperience" className="text-lg font-medium text-gray-700">I have work experience</label>
+              <input type="checkbox" id="workExperience" className="w-4 h-4" checked={hasWorkExperience} onChange={handleWorkExperienceToggle} />
+              <label htmlFor="workExperience" className="text-md font-medium text-gray-700">I have work experience</label>
             </div>
 
             {hasWorkExperience && (
@@ -166,43 +166,43 @@ const handleInputChange = (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                       <div>
                         <label className="block mb-2 text-sm text-gray-700 font-medium">Company Name</label>
-                        <input type="text" value={exp.company} onChange={(e) => handleInputChange(e, index, "company")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="Company Name" />
+                        <input type="text" value={exp.company} onChange={(e) => handleInputChange(e, index, "company")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="Company Name"/>
                       </div>
                       <div>
                         <label className="block mb-2 text-sm text-gray-700 font-medium">Location</label>
-                        <input type="text" value={exp.location} onChange={(e) => handleInputChange(e, index, "location")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="Location" />
+                        <input type="text" value={exp.location} onChange={(e) => handleInputChange(e, index, "location")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="Location" />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                       <div>
                         <label className="block mb-2 mt-2 text-sm text-gray-700 font-medium">Role</label>
-                        <input type="text" value={exp.role} onChange={(e) => handleInputChange(e, index, "role")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="Role" />
+                        <input type="text" value={exp.role} onChange={(e) => handleInputChange(e, index, "role")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="Role"/>
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <label className="block mb-2 mt-2 text-sm text-gray-700 font-medium">Start Date</label>
-                          <input type="text" value={exp.startDate} onChange={(e) => handleInputChange(e, index, "startDate")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="June 2024" />
+                          <input type="text" value={exp.startDate} onChange={(e) => handleInputChange(e, index, "startDate")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="June 2024" />
                         </div>
                         <div>
                           <label className="block mb-2 mt-2 text-sm text-gray-700 font-medium">End Date</label>
-                          <input type="text" value={exp.endDate} onChange={(e) => handleInputChange(e, index, "endDate")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-lime-200" placeholder="August 2024" />
+                          <input type="text" value={exp.endDate} onChange={(e) => handleInputChange(e, index, "endDate")} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="August 2024" />
                         </div>
                       </div>
                     </div>
 
                     <label className="block my-2 text-sm text-gray-700 font-medium">Responsibilities</label>
-                    <textarea rows={3} value={exp.responsibilities} onChange={(e) => handleInputChange(e, index, "responsibilities")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-gray-200"></textarea>
+                    <textarea rows={3} value={exp.responsibilities} onChange={(e) => handleInputChange(e, index, "responsibilities")} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-black text-white" placeholder="developed xyz, improved website efficiency by x%. for every new point, separate it by comma" ></textarea>
 
                     {formData.workExperiences.length > 1 && (
-                      <button onClick={() => removeWorkExperience(index)} type="button" className="mt-3 text-red-600 hover:underline flex items-center gap-2">
+                      <button onClick={() => removeWorkExperience(index)} type="button" className="mt-3 text-red-600 hover:text-red-700 flex items-center gap-2">
                         <FaTrash /> Remove
                       </button>
                     )}
                   </div>
                 ))}
 
-                <button onClick={addWorkExperience} type="button" className="flex items-center text-blue-600 hover:underline mt-2">
+                <button onClick={addWorkExperience} type="button" className="flex items-center font-semibold text-lime-600 hover:text-lime-600 mt-2">
                   <FaPlus className="mr-1" /> Add More Work Experience
                 </button>
               </div>
@@ -213,11 +213,11 @@ const handleInputChange = (
           </div>
           <div>
             <label className="block mb-2 text-sm text-gray-700 font-medium">Write Your Skills</label>
-            <textarea rows={4} name="skills" value={formData.skills} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-gray-200"></textarea>
+            <textarea rows={4} name="skills" value={formData.skills} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-black text-white" placeholder="For every skill separate it by comma. Example html, css, js" required></textarea>
           </div>
 
             <div className="mt-6 grid">
-              <button type="submit" className="w-full py-3 px-4 bg-[#D9F99D] text-black text-sm font-medium rounded-lg hover:bg-[#889472]">Continue</button>
+              <button type="submit" className="w-full py-3 px-4 bg-black text-white text-sm font-medium rounded-lg hover:bg-[#889472]">Continue</button>
             </div>
           </div>
         </form>

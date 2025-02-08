@@ -100,7 +100,8 @@ function ProjectsPageContent() {
 
   return (
     <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Select Up to 4 Projects</h1>
+            <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
+      <h1 className="text-3xl font-bold mb-4 text-center">Select Up to <span className="bg-green-300 px-2 rounded-lg">4 Projects</span></h1>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {projects.map((project) => (
           <button
@@ -108,18 +109,20 @@ function ProjectsPageContent() {
             onClick={() => handleSelectProject(project.name)}
             className={`p-4 rounded-lg text-left transition ${
               selectedProjects.includes(project.name)
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200"
+                ? "bg-slate-200 text-black"
+                : "bg-black text-white"
             }`}
           >
             <p className="font-bold">{project.name}</p>
-            <p className="text-sm text-gray-700">{project.description}</p>
+            <p className="text-sm text-gray-500">{project.description?.length > 100
+                    ? `${project.description?.substring(0, 120)}...`
+                    : project.description}</p>
           </button>
         ))}
       </div>
       <button
         onClick={handleSubmit}
-        className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg disabled:bg-gray-400"
+        className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg disabled:bg-gray-400 hover:bg-green-700"
         disabled={selectedProjects.length === 0}
       >
         Submit

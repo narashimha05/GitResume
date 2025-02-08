@@ -82,7 +82,7 @@ function ResumePageContent() {
       if (projectsError) throw projectsError;
       const { error: userError } = await supabase.from("users").delete().eq("id", userId);
       if (userError) throw userError;
-      router.push("/form");
+      router.push("/");
     } catch (error) {
       console.error("Error deleting user:", error);
       alert("Failed to delete profile. Please try again.");
@@ -90,6 +90,7 @@ function ResumePageContent() {
   };
   return (
     <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-xl rounded-lg border border-gray-200">
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_2px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_2px,transparent_1px)] bg-[size:6rem_4rem]"></div>
       <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Resume Details</h1>
       {userDetails ? (
         <div className="space-y-4">
@@ -106,13 +107,13 @@ function ResumePageContent() {
             </div>
           </div>
           
-          <p className="text-gray-700"><div className='font-extrabold text-xl'>Education:</div> {userDetails.education.split("\n").map((edu, index) => (
+          <p className="text-gray-700"><div className='font-extrabold text-xl'>Education:</div> {userDetails.education.split(/\s*,\s*/).map((edu, index) => (
             <div key={index} className=" px-3 py-1 rounded-full text-sm">- {edu}</div>
           ))}</p>
           <div>
             <h2 className="text-xl font-extrabold">Skills:</h2>
             <div className="flex flex-wrap gap-2 mt-2">
-              {userDetails.skills.split("\n").map((skill, index) => (
+              {userDetails.skills.split(/\s*,\s*/).map((skill, index) => (
                 <span key={index} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">{skill}</span>
               ))}
             </div>
@@ -140,7 +141,7 @@ function ResumePageContent() {
                           <p className='text-sm text-gray-700'>{exp.startDate} - {exp.endDate}</p>
                         </div>
                       </div>
-                        <p className='text-sm mt-2'>{exp.responsibilities.split("\n").map((resp, index)=>
+                        <p className='text-sm mt-2'>{exp.responsibilities.split(/\s*,\s*/).map((resp, index)=>
                           // <div key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{resp}</div>
                           <li key={index}>
                             • {resp}
