@@ -84,7 +84,7 @@ function ProjectsPage() {
     }
 
     // Redirect to resume page
-    router.push("/resume");
+    router.push(`/resume?user_id=${userId}`);
   };
 
   return (

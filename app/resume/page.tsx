@@ -1,55 +1,87 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import supabase from "@/config/supabaseClient";
-function Resume() {
-  interface Project {
-    id: number;
-    name: string;
+
+function ResumePage() {
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("user_id");
+
+  interface UserDetails {
+    fullName: string;
+    address: string;
+    phoneNumber: string;
     description: string;
-    url: string;
   }
 
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
+  const [projects, setProjects] = useState<{ id: number; project_name: string }[]>([]);
 
+  // Fetch User Details
   useEffect(() => {
-    const fetchSelectedProjects = async () => {
-      const { data, error } = await supabase.from("selected_projects").select("*");
+    const fetchUserDetails = async () => {
+      if (!userId) return;
+
+      const { data, error } = await supabase
+        .from("users")
+        .select("fullName, address, phoneNumber, description")
+        .eq("id", userId)
+        .single();
+
       if (error) {
-        console.error("Error fetching projects:", error);
-      } else {
-        setProjects(data);
+        console.error("Error fetching user details:", error.message);
+        return;
       }
+
+      setUserDetails(data);
     };
-    fetchSelectedProjects();
-  }, []);
+
+    fetchUserDetails();
+  }, [userId]);
+
+  // Fetch Selected Projects
+  useEffect(() => {
+    const fetchProjects = async () => {
+      if (!userId) return;
+
+      const { data, error } = await supabase
+        .from("projects")
+        .select("id, project_name")
+        .eq("user_id", userId);
+
+      if (error) {
+        console.error("Error fetching projects:", error.message);
+        return;
+      }
+
+      setProjects(data);
+    };
+
+    fetchProjects();
+  }, [userId]);
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Resume</h1>
-      <h2 className="text-2xl font-semibold mt-6">Selected Projects</h2>
-      <div className="grid gap-4 mt-4">
-        {projects.length > 0 ? (
-          projects.map((project, index) => (
-            <div key={index} className="border p-4 rounded-lg bg-gray-100">
-              <h3 className="text-xl font-semibold">{project.name}</h3>
-              <p className="text-sm text-gray-600">{project.description}</p>
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                View Project
-              </a>
-            </div>
-          ))
-        ) : (
-          <p>No projects selected.</p>
-        )}
-      </div>
+    <div className="p-6">
+      <h1 className="text-xl font-bold mb-4">Resume Details</h1>
+
+      {userDetails && (
+        <div className="mb-4">
+          <p><strong>Name:</strong> {userDetails.fullName}</p>
+          <p><strong>Address:</strong> {userDetails.address}</p>
+          <p><strong>Phone:</strong> {userDetails.phoneNumber}</p>
+          <p><strong>Description:</strong> {userDetails.description}</p>
+        </div>
+      )}
+
+      <h2 className="text-lg font-bold mt-4">Selected Projects</h2>
+      <ul className="list-disc pl-5">
+        {projects.map((project) => (
+          <li key={project.id}>{project.project_name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default Resume;
+export default ResumePage;
