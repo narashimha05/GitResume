@@ -3,8 +3,9 @@ import GitHubCalendar from 'react-github-calendar';
 import { useState, useEffect } from "react";
 import { useRouter,useSearchParams } from "next/navigation";
 import supabase from "@/config/supabaseClient";
+import { Suspense } from 'react';
 
-function ResumePage() {
+function ResumePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const userId = searchParams.get("user_id");
@@ -178,4 +179,10 @@ function ResumePage() {
   );
 }
 
-export default ResumePage;
+export default function ResumePage() {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ResumePageContent />
+      </Suspense>
+    );
+}
