@@ -3,7 +3,7 @@
 Automatically generate a professional resume using your GitHub profile and projects.  
 
 ## 🌟 Features  
-- **📄 Auto-generated Resume** – Fetches your GitHub profile and projects.
+- **📄 Auto-generated Resume** – Fetches your GitHub profile and projects.  
 - **🎨 Clean & Professional UI** – Displays user details, projects, and experience in an elegant format.  
 - **🔗 GitHub Integration** – Showcases your repositories with descriptions and links.  
 - **📍 Location & Contact Info** – Adds your location, phone number based on input.  
@@ -17,17 +17,21 @@ Automatically generate a professional resume using your GitHub profile and proje
 4. **Generate Your Resume** instantly!  
 
 ## 🎨 Wireframe / Drawing  
-[🔗 View Project Design](#) (https://drive.google.com/file/d/1zYz8-qyRGQ2QoVNikRvVALRLUJYTONdg/view?usp=drive_link)  
+[🔗 View Project Design](https://drive.google.com/file/d/1zYz8-qyRGQ2QoVNikRvVALRLUJYTONdg/view?usp=drive_link)  
 
 ## 🔗 Deployed Link  
-[🚀 Live Demo](#) (https://git-resume-coral.vercel.app/)
+[🚀 Live Demo](https://git-resume-coral.vercel.app/)  
 
 ## 🛠️ Tech Stack  
 - **Frontend:** Next.js, Tailwind CSS  
 - **Backend:** Supabase (Database & Authentication)  
 - **Other:** GitHub API, React Icons  
 
-Special Thanks to my Friend AtmaPrakash for his UI design and wireframe.
+## 👥 Contributors  
+- **[@narashimha05](https://github.com/narashimha05)**  
+- **[@Devilgamer3r](https://github.com/Devilgamer3r)**  
+
+Special thanks to my friend **AtmaPrakash** (aka Devilgamer3r) for his UI design and wireframe.  
 
 ## 📥 Installation  
 ```sh
