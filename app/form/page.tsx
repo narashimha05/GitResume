@@ -85,6 +85,7 @@ const handleInputChange = (
     try {
       const formattedData = {
         ...formData,
+        hasWorkExperience: hasWorkExperience,
         education: formData.education.replace(/, /g, "\n"),
         skills: formData.skills.replace(/, /g, "\n"),
         workExperiences: formData.workExperiences.map(exp => ({
@@ -227,7 +228,7 @@ const handleInputChange = (
 
             {/* Submit Button */}
             <div className="mt-6 grid">
-              <button type="submit" className="w-full py-3 px-4 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700">Continue</button>
+              <button type="submit" className="w-full py-3 px-4 bg-[#D9F99D] text-black text-sm font-medium rounded-lg hover:bg-[#889472]">Continue</button>
             </div>
           </div>
         </form>
