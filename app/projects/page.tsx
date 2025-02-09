@@ -8,7 +8,7 @@ import { BeatLoader } from "react-spinners";
 function ProjectsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const githubUsername = searchParams.get("githubUsername");
+  const githubUsername = searchParams.get("githubUsername")?.trim();
 
   const [projects, setProjects] = useState<{ id: number; name: string; description: string }[]>([]);
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);

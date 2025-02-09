@@ -79,6 +79,7 @@ const handleInputChange = (
     try {
       const formattedData = {
         ...formData,
+        githubUsername: formData.githubUsername.trim(),
         hasWorkExperience: hasWorkExperience,
         education: formData.education,
         skills: formData.skills,
