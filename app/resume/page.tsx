@@ -194,7 +194,7 @@ function ResumePageContent() {
             className="mt-6 w-full bg-black  text-white py-2 rounded-lg hover:bg-black-700 transition-all font-bold"
             data-tooltip-id="my-tooltip" data-tooltip-content="This will erase the data generated here and goes back to the home page"
           >
-            {loading?<BeatLoader size={8} color="#ffffff"/>:<p>Back</p>}
+            {loading?<BeatLoader size={8} color="#ffffff"/>:<p>Delete and Go Home</p>}
           </button>
           <Tooltip id="my-tooltip" />
         </div>
