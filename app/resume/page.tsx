@@ -189,14 +189,14 @@ function ResumePageContent() {
           </div>
 
           </ul>
-          <button
+{/*           <button
             onClick={handleDelete}
             className="mt-6 w-full bg-black  text-white py-2 rounded-lg hover:bg-black-700 transition-all font-bold"
             data-tooltip-id="my-tooltip" data-tooltip-content="This will erase the data generated here and goes back to the home page"
           >
             {loading?<BeatLoader size={8} color="#ffffff"/>:<p>Delete and Go Home</p>}
           </button>
-          <Tooltip id="my-tooltip" />
+          <Tooltip id="my-tooltip" /> */}
         </div>
       ) : (
         <p className="text-center text-gray-500">Loading user details...</p>
