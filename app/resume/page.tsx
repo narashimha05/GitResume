@@ -10,8 +10,8 @@ import { FaLocationPin } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { LuExternalLink } from "react-icons/lu";
-import { BeatLoader } from "react-spinners";
-import { Tooltip } from 'react-tooltip'
+// import { BeatLoader } from "react-spinners";
+// import { Tooltip } from 'react-tooltip'
 
 function ResumePageContent() {
   const router = useRouter();
@@ -41,7 +41,7 @@ function ResumePageContent() {
 
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [projects, setProjects] = useState<{ id: number; project_name: string; description: string }[]>([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -76,23 +76,23 @@ function ResumePageContent() {
     fetchProjects();
   }, [userId]);
 
-  const handleDelete = async () => {
-    if (!userId) return;
-    setLoading(true);
-    const confirmDelete = window.confirm("Are you sure you want to delete your profile?");
-    if (!confirmDelete) return;
-    try {
-      const { error: projectsError } = await supabase.from("projects").delete().eq("user_id", userId);
-      if (projectsError) throw projectsError;
-      const { error: userError } = await supabase.from("users").delete().eq("id", userId);
-      setLoading(false);
-      if (userError) throw userError;
-      router.push("/");
-    } catch (error) {
-      console.error("Error deleting user:", error);
-      alert("Failed to delete profile. Please try again.");
-    }
-  };
+  // const handleDelete = async () => {
+  //   if (!userId) return;
+  //   setLoading(true);
+  //   const confirmDelete = window.confirm("Are you sure you want to delete your profile?");
+  //   if (!confirmDelete) return;
+  //   try {
+  //     const { error: projectsError } = await supabase.from("projects").delete().eq("user_id", userId);
+  //     if (projectsError) throw projectsError;
+  //     const { error: userError } = await supabase.from("users").delete().eq("id", userId);
+  //     setLoading(false);
+  //     if (userError) throw userError;
+  //     router.push("/");
+  //   } catch (error) {
+  //     console.error("Error deleting user:", error);
+  //     alert("Failed to delete profile. Please try again.");
+  //   }
+  // };
   return (
     <div className="max-w-4xl mx-auto my-10 p-6 bg-white shadow-xl rounded-lg border border-gray-200">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_2px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_2px,transparent_1px)] bg-[size:6rem_4rem]"></div>
