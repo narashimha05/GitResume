@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BeatLoader } from "react-spinners";
 
-
 export default function LandingPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
