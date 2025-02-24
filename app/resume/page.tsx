@@ -1,7 +1,8 @@
 "use client";
 // import GitHubCalendar from 'react-github-calendar';
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import supabase from "@/config/supabaseClient";
 import { Suspense } from 'react';
 import Image from 'next/image';
@@ -14,7 +15,7 @@ import { LuExternalLink } from "react-icons/lu";
 // import { Tooltip } from 'react-tooltip'
 
 function ResumePageContent() {
-  const router = useRouter();
+  // const router = useRouter();
   const searchParams = useSearchParams();
   const userId = searchParams.get("user_id");
 
