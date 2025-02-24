@@ -19,7 +19,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head><meta name="google-adsense-account" content="ca-pub-5949291372561693"></Head>
+      <Head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5949291372561693"
+     crossOrigin="anonymous"></script></Head>
       <body
         className={`${poppins.className} antialiased`}
       >
