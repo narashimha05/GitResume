@@ -4,6 +4,8 @@ import { FaGithub, FaPlus, FaTrash } from "react-icons/fa";
 import supabase from "@/config/supabaseClient";
 import { useRouter } from "next/navigation";
 import { BeatLoader } from "react-spinners";
+import toast from "react-hot-toast";
+
 function Page() {
   const router = useRouter();
   const [hasWorkExperience, setHasWorkExperience] = useState(false);
@@ -71,6 +73,19 @@ const handleInputChange = (
   }
 };
 
+  const checkGithubUsername = async (username:string) => {
+    try{
+      const response = await fetch(`https://api.github.com/users/${username}`);
+      if (!response.ok) {
+        toast.error("Invalid GitHub username. Please enter a valid GitHub username");
+        return false;
+      }
+    } catch (err) {
+      console.error("Error checking github username:", err);
+      return false;
+    }
+    return true;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     setLoading(true);
@@ -88,6 +103,11 @@ const handleInputChange = (
           responsibilities: exp.responsibilities,
         })),
       };
+
+      if(!(await checkGithubUsername(formattedData.githubUsername))) {
+        setLoading(false);
+        return;
+      }
 
       const { data, error } = await supabase.from("users").insert([formattedData]);
 
@@ -226,10 +246,3 @@ const handleInputChange = (
 }
 
 export default Page;
-
-
-
-
-
-
-
