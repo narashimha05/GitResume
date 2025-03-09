@@ -29,6 +29,9 @@ function ResumePageContent() {
     skills: string;
     hasWorkExperience: boolean;
     workExperiences: string | null;
+    linkedin: string;
+  twitter: string;
+  portfolio: string;
   }
 
   interface WorkExperience {
@@ -49,7 +52,7 @@ function ResumePageContent() {
       if (!userId) return;
       const { data, error } = await supabase
         .from("users")
-        .select("fullName, address, phoneNumber, description, githubUsername, education, skills, workExperiences, hasWorkExperience")
+        .select("fullName, address, phoneNumber, description, githubUsername, education, skills, workExperiences, hasWorkExperience,linkedin, twitter, portfolio")
         .eq("id", userId)
         .single();
       if (error) {
@@ -109,6 +112,21 @@ function ResumePageContent() {
               <a href={`https://github.com/${userDetails.githubUsername}/`} target="blank"><p className="text-gray-500 flex gap-2 items-center text-sm sm:text-md"><FaGithub size={20}/>{userDetails.githubUsername}</p></a>
               <p className="text-gray-500 flex gap-2 items-center text-sm sm:text-md"><IoCall size={20}/> {userDetails.phoneNumber}</p>
               <p className="text-gray-500 flex gap-2 items-center text-sm sm:text-md"><FaLocationPin size={20}/> {userDetails.address}</p>
+              {userDetails.linkedin && (
+    <a href={userDetails.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-500 flex gap-2 items-center text-sm sm:text-md hover:text-blue-600">
+      <LuExternalLink size={20}/> LinkedIn
+    </a>
+  )}
+  {userDetails.twitter && (
+    <a href={userDetails.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-500 flex gap-2 items-center text-sm sm:text-md hover:text-blue-400">
+      <LuExternalLink size={20}/> Twitter
+    </a>
+  )}
+  {userDetails.portfolio && (
+    <a href={userDetails.portfolio} target="_blank" rel="noopener noreferrer" className="text-gray-500 flex gap-2 items-center text-sm sm:text-md hover:text-purple-600">
+      <LuExternalLink size={20}/> Portfolio
+    </a>
+  )}
             </div>
             </div>
           </div>

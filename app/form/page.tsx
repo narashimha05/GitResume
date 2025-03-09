@@ -18,7 +18,10 @@ function Page() {
     workExperiences: [{
       company:"", location:"", role:"", startDate:"", endDate:"", responsibilities: ""
     }],
-    skills: ""
+    skills: "",
+    linkedin: "",
+    twitter: "",
+    portfolio: ""
   });
 
   const handleWorkExperienceToggle = () => {
@@ -138,7 +141,20 @@ const handleInputChange = (
                 <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="Write Your Phone Number" required/>
               </div>
             </div>
-
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
+  <div>
+    <label className="block mb-2 text-sm text-gray-700 font-medium">LinkedIn URL</label>
+    <input type="url" name="linkedin" value={formData.linkedin} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="https://linkedin.com/in/username"/>
+  </div>
+  <div>
+    <label className="block mb-2 text-sm text-gray-700 font-medium">Twitter/X URL</label>
+    <input type="url" name="twitter" value={formData.twitter} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="https://x.com/username"/>
+  </div>
+  <div>
+    <label className="block mb-2 text-sm text-gray-700 font-medium">Portfolio URL</label>
+    <input type="url" name="portfolio" value={formData.portfolio} onChange={handleInputChange} className="py-3 px-4 block w-full border-black rounded-lg text-sm bg-black text-white" placeholder="https://yourportfolio.com"/>
+  </div>
+</div>
             <div>
               <label className="block mb-2 text-sm text-gray-700 font-medium">Describe Your Role</label>
               <textarea rows={1} name="description" value={formData.description} onChange={handleInputChange} className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm bg-black text-white" placeholder="Like Frontend Developer, Full Stack Developer" required></textarea>
