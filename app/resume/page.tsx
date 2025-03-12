@@ -1,6 +1,6 @@
 "use client";
 // import GitHubCalendar from 'react-github-calendar';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 // import { useRouter } from "next/navigation";
 import supabase from "@/config/supabaseClient";
@@ -11,6 +11,8 @@ import { FaLocationPin } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { LuExternalLink } from "react-icons/lu";
+import { useReactToPrint } from 'react-to-print';
+import toast from "react-hot-toast";
 // import { BeatLoader } from "react-spinners";
 // import { Tooltip } from 'react-tooltip'
 
@@ -43,6 +45,9 @@ function ResumePageContent() {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [projects, setProjects] = useState<{ id: number; project_name: string; description: string }[]>([]);
   // const [loading, setLoading] = useState(false);
+
+  const resumeRef = useRef(null);
+  const [isPrinting, setIsPrinting] = useState(false);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -77,6 +82,27 @@ function ResumePageContent() {
     fetchProjects();
   }, [userId]);
 
+  const handlePrint = useReactToPrint({
+    contentRef: resumeRef,
+    documentTitle: `${userDetails?.fullName}'s Resume`,
+    onBeforePrint: async () => {
+      setIsPrinting(true); 
+    },
+    onAfterPrint: () => {
+      setTimeout(() => {
+        if (isPrinting) {
+          toast.success("Resume downloaded successfully!");
+        }
+        setIsPrinting(false);
+      }, 500);
+    },
+    pageStyle: `
+      @page {
+        margin: 1cm;
+      }
+    `,
+    onPrintError: () => toast.error("Failed to download resume. Please try again."),
+  });
   // const handleDelete = async () => {
   //   if (!userId) return;
   //   setLoading(true);
@@ -99,7 +125,7 @@ function ResumePageContent() {
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_2px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_2px,transparent_1px)] bg-[size:6rem_4rem]"></div>
       <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Resume Details</h1>
       {userDetails ? (
-        <div className="space-y-4">
+        <div className="space-y-4" ref={resumeRef}>
           <div className="flex items-center space-x-4 border-b pb-4">
             <Image src={`https://github.com/${userDetails.githubUsername}.png?size=400`} quality={100} className="w-24 h-24 rounded-full" alt="GitHub Avatar" width={24} height={24}/>
             <div>
@@ -202,6 +228,9 @@ function ResumePageContent() {
       ) : (
         <p className="text-center text-gray-500">Loading user details...</p>
       )}
+      <button onClick={() => handlePrint()} className="mt-6 w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition-all font-bold">
+        Download as PDF
+      </button>
     </div>
   );
 }
