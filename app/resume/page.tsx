@@ -12,6 +12,7 @@ import { IoCall } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { LuExternalLink } from "react-icons/lu";
 import { useReactToPrint } from 'react-to-print';
+import toast from "react-hot-toast";
 // import { BeatLoader } from "react-spinners";
 // import { Tooltip } from 'react-tooltip'
 
@@ -81,8 +82,6 @@ function ResumePageContent() {
     fetchProjects();
   }, [userId]);
 
-  console.log(projects,userId)
-
   const handlePrint = useReactToPrint({
     contentRef: resumeRef,
     documentTitle: `${userDetails?.fullName}'s Resume`,
@@ -92,7 +91,7 @@ function ResumePageContent() {
     onAfterPrint: () => {
       setTimeout(() => {
         if (isPrinting) {
-          alert("Resume downloaded successfully!");
+          toast.success("Resume downloaded successfully!");
         }
         setIsPrinting(false);
       }, 500);
@@ -102,7 +101,7 @@ function ResumePageContent() {
         margin: 1cm;
       }
     `,
-    onPrintError: () => alert("Failed to download resume. Please try again."),
+    onPrintError: () => toast.error("Failed to download resume. Please try again."),
   });
   // const handleDelete = async () => {
   //   if (!userId) return;
