@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import supabase from "@/config/supabaseClient";
 import { BeatLoader } from "react-spinners";
+import ThemeToggle from "@/components/ThemeToggle";
 
 function ProjectsPageContent() {
   const router = useRouter();
@@ -101,15 +102,18 @@ function ProjectsPageContent() {
   };
 
   return (
-    <div className="p-6">
-            <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
-      <h1 className="text-xl sm:text-3xl font-bold mb-4 text-center">Select Up to <span className="bg-green-300 px-2 rounded-lg">4 Projects</span></h1>
+    <div className="p-6 dark:bg-black">
+            <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] dark:bg-black"></div>
+      <div className="flex justify-end items-center mb-4">
+        <h1 className="text-xl sm:text-3xl font-bold text-center dark:text-white">Select Up to <span className="bg-green-300 px-2 rounded-lg text-black">4 Projects</span></h1>
+        <ThemeToggle />
+      </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {projects.map((project) => (
           <button
             key={project.id}
             onClick={() => handleSelectProject(project.name)}
-            className={`p-4 rounded-lg text-left transition ${
+            className={`p-4 rounded-lg text-left transition dark:border dark:border-white ${
               selectedProjects.includes(project.name)
                 ? "bg-slate-200 text-black"
                 : "bg-black text-white"
@@ -124,10 +128,10 @@ function ProjectsPageContent() {
       </div>
       <button
         onClick={handleSubmit}
-        className="mt-4 px-6 py-2 bg-black text-white rounded-lg disabled:bg-gray-400 hover:bg-gray-700"
+        className="mt-4 px-6 py-2 bg-black text-white rounded-lg disabled:bg-gray-400 hover:bg-gray-700 dark:bg-white dark:text-black dark:hover:bg-gray-300"
         disabled={selectedProjects.length === 0}
       >
-        {loading ? <BeatLoader size={8} color="#ffffff"/>:<p>Submit</p>}
+        {loading ? <BeatLoader size={8}/>:<p>Submit</p>}
       </button>
     </div>
   );
