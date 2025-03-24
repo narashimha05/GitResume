@@ -460,7 +460,18 @@ function Page() {
                 className="w-full py-3 px-4 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 
                 dark:bg-white dark:text-black dark:hover:bg-gray-200 dark:hover:text-black"
               >
-                {loading ? <BeatLoader size={8} /> : <p>Continue</p>}
+                {loading ? (
+                  <BeatLoader
+                    size={8}
+                    color={
+                      localStorage.getItem("gitresume-darkMode") === "enabled"
+                        ? "#000"
+                        : "#fff"
+                    }
+                  />
+                ) : (
+                  <p>Continue</p>
+                )}
               </button>
             </div>
           </div>
