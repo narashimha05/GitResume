@@ -42,7 +42,7 @@ export default function LandingPage() {
           Effortlessly
         </motion.h1>
         <motion.p
-          className="text-lg md:text-xl text-[#96A3B0] dark:text-[#B0C4D4] mb-6 max-w-2xl relative z-10"
+          className="text-lg md:text-xl text-[#96A3B0] dark:text-[#AFB6C0] mb-6 max-w-2xl relative z-10"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
