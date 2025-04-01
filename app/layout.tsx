@@ -9,8 +9,12 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Git Resume",
-  description: "Create a professional resume from your GitHub profile.",
+  title: "GitResume | Create Your GitHub-Powered Resume",
+  description: "Generate a professional resume from your GitHub projects in seconds. Showcase skills, work experience, and open-source contributions.",
+  keywords: "GitHub resume, developer portfolio, software engineer CV, open-source resume",
+  alternates: {
+    canonical: "https://git-resume-coral.vercel.app/", // Prevents duplicate content
+  },
 };
 
 export default function RootLayout({
